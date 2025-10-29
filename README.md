@@ -34,17 +34,26 @@ a list using completion.
   ;; ... or clone from GitHub
   ;; :vc (:url "https://github.com/sonofjon/restore-killed.el"
   ;;          :rev :newest)
-  :commands (restore-killed-file
-             restore-killed-file-select
-             restore-killed-buffer
-             restore-killed-buffer-select)
   :config
-  ;; Add hooks to track killed buffers
-  (add-hook 'kill-buffer-hook #'restore-killed--file-save)
-  (add-hook 'kill-buffer-hook #'restore-killed--buffer-save))
+  ;; Enable the minor mode to track killed buffers
+  (restore-killed-mode 1))
 ```
 
 ## Usage
+
+### Enabling tracking
+
+To track killed buffers and files, enable the minor mode:
+
+```elisp
+(restore-killed-mode 1)
+```
+
+You can also toggle it interactively with `M-x restore-killed-mode`.
+
+The minor mode automatically adds hooks to track killed buffers. When
+disabled, it removes these hooks and stops tracking new killed buffers
+(previously tracked buffers remain available for restoration).
 
 ### File buffers
 

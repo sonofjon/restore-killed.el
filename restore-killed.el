@@ -20,6 +20,7 @@
 ;; are stored up to a configurable size limit.
 ;;
 ;; Provides:
+;;  - restore-killed-mode (minor mode to enable tracking)
 ;;  - restore-killed-file
 ;;  - restore-killed-file-select
 ;;  - restore-killed-buffer
@@ -29,14 +30,9 @@
 ;;
 ;;   (use-package restore-killed
 ;;     :load-path "/path/to/restore-killed"
-;;     :commands (restore-killed-file
-;;                restore-killed-file-select
-;;                restore-killed-buffer
-;;                restore-killed-buffer-select)
 ;;     :config
-;;     ;; Add hooks to track killed buffers
-;;     (add-hook 'kill-buffer-hook #'restore-killed--file-save)
-;;     (add-hook 'kill-buffer-hook #'restore-killed--buffer-save))
+;;     ;; Enable the minor mode to track killed buffers
+;;     (restore-killed-mode 1))
 ;;
 ;;; Code:
 
@@ -146,6 +142,23 @@ Note, this does not include window properties etc."
               (switch-to-buffer (get-buffer-create (car buffer-entry)))
               (insert (cdr buffer-entry))))))
     (user-error "No recently-killed non-file buffers to reopen")))
+
+;;; Minor mode
+
+;;;###autoload
+(define-minor-mode restore-killed-mode
+  "Toggle restore-killed mode.
+When enabled, track killed buffers and files so they can be restored
+later using `restore-killed-file' and `restore-killed-buffer' commands."
+  :global t
+  :lighter " RK"
+  :group 'restore-killed
+  (if restore-killed-mode
+      (progn
+        (add-hook 'kill-buffer-hook #'restore-killed--file-save)
+        (add-hook 'kill-buffer-hook #'restore-killed--buffer-save))
+    (remove-hook 'kill-buffer-hook #'restore-killed--file-save)
+    (remove-hook 'kill-buffer-hook #'restore-killed--buffer-save)))
 
 (provide 'restore-killed)
 ;;; restore-killed.el ends here
