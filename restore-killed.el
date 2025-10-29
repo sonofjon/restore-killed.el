@@ -45,7 +45,7 @@
 (defvar restore-killed-file-list nil
   "List of recently killed files.")
 
-(defcustom restore-killed-file-max 20
+(defcustom restore-killed-file-max 10
   "Maximum number of killed files to store."
   :type 'integer
   :group 'restore-killed)
@@ -88,12 +88,12 @@ Only save content if the buffer is associated with a filename."
   "List of recently killed non-file buffers.
 Each element is a cons cell (buffer-name . buffer-contents).")
 
-(defcustom restore-killed-buffer-max-size 50000
+(defcustom restore-killed-buffer-max-size 10000
   "Maximum size of non-file buffer (in characters) to store."
   :type 'integer
   :group 'restore-killed)
 
-(defcustom restore-killed-buffer-max 20
+(defcustom restore-killed-buffer-max 10
   "Maximum number of killed non-file buffers to store."
   :type 'integer
   :group 'restore-killed)

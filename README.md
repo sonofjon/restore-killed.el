@@ -63,13 +63,13 @@ a list using completion.
 
 The package provides several customizable variables:
 
-- `restore-killed-file-max` (default: 20)
+- `restore-killed-file-max` (default: 10)
   Maximum number of killed files to store.
 
-- `restore-killed-buffer-max` (default: 20)
+- `restore-killed-buffer-max` (default: 10)
   Maximum number of killed non-file buffers to store.
 
-- `restore-killed-buffer-max-size` (default: 50000)
+- `restore-killed-buffer-max-size` (default: 10000)
   Maximum size of non-file buffer (in characters) to store.  Buffers
   larger than this will not be saved.
 
@@ -77,8 +77,8 @@ Example:
 
 ```elisp
 (setq restore-killed-file-max 5
-      restore-killed-buffer-max 10
-      restore-killed-buffer-max-size 10000)
+      restore-killed-buffer-max 15
+      restore-killed-buffer-max-size 20000)
 ```
 
 ## Requirements
