@@ -36,6 +36,11 @@
 ;;
 ;;; Code:
 
+(defgroup restore-killed nil
+  "Restore killed buffers and files."
+  :group 'convenience
+  :prefix "restore-killed-")
+
 ;;; Undo for killed file buffers
 
 (defvar restore-killed-file-list nil
